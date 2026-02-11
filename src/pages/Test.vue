@@ -1,0 +1,3 @@
+<template>
+  <CForm></CForm>
+</template>
