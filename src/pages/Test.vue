@@ -1,3 +1,4 @@
 <template>
-  <CForm></CForm>
+  <!--  <CForm></CForm>-->
+  <CFormWithVeeValidate></CFormWithVeeValidate>
 </template>
