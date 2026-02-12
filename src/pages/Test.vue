@@ -1,4 +1,5 @@
 <template>
   <!--  <CForm></CForm>-->
-  <CFormWithVeeValidate></CFormWithVeeValidate>
+  <!--  <CFormWithVeeValidate></CFormWithVeeValidate>-->
+  <CFormWithVuelidate></CFormWithVuelidate>
 </template>
