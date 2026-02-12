@@ -3,28 +3,34 @@
     class="mx-auto"
     width="300">
     <v-form
-      @submit.prevent="submit">
+      v-model="formIsValid"
+      @submit.prevent="submit"
+      ref="form">
       <v-text-field
-        v-model="form.email"
+        v-model="formData.email"
         label="Email"
         variant="solo"
         prepend-inner-icon="mdi-mail"
-      ></v-text-field>
+        :rules="inputRules">
+      </v-text-field>
       <v-text-field
-        v-model="form.password"
+        v-model="formData.password"
+        type="password"
         label="Password"
         variant="solo"
         prepend-inner-icon="mdi-key"
-        type="password"
-      ></v-text-field>
+        :rules="inputRules"
+        validate-on="lazy">
+      </v-text-field>
 
       <v-checkbox
-        v-model="form.remember"
+        v-model="formData.remember"
         color="blue"
         label="Remember Me"
-        hide-details
-      ></v-checkbox>
+        hide-details>
+      </v-checkbox>
       <v-btn
+        :disabled="!formIsValid"
         color="blue"
         class="mt-2"
         type="submit"
@@ -34,15 +40,39 @@
     </v-form>
   </v-sheet>
 </template>
-<script setup>
-const form = ref({
+<!---->
+<script setup lang="ts">
+import {VForm} from "vuetify/components";
+
+const formData = ref({
   email: "",
   password: "",
   remember: false,
 });
 
-function submit() {
+const inputRules = [
+  (value: string) => !!value || "Required",
+  (value: string) => value.length >= 3 || "Minimum length is 3 characters",
+];
 
-  alert(JSON.stringify(form.value));
+const form = ref<VForm | null>(null);
+// const form = ref();
+const formIsValid = ref(false);
+
+async function submit() {
+  // 1. Destructure 'errors' along with 'valid'
+  const {valid, errors} = await form.value.validate();
+
+  if (valid) {
+    alert(JSON.stringify(formData.value));
+  } else {
+    // Note: for learning only, this button disabled => never show on console. To see => remove attribute :disabled="!formIsValid" in v-button
+    // 2. Log the errors array to the console
+    console.log("Validation failed!", errors);
+
+    // Optional: Log only the specific error messages
+    const messages = errors.map(e => `${e.id}: ${e.errorMessages[0]}`);
+    console.table(messages);
+  }
 }
 </script>
