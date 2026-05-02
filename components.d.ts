@@ -16,6 +16,7 @@ declare module 'vue' {
     CFormWithVeeValidate: typeof import('./src/components/forms/CFormWithVeeValidate.vue')['default']
     CFormWithVuelidate: typeof import('./src/components/forms/CFormWithVuelidate.vue')['default']
     CNavigationDrawer: typeof import('./src/components/menus/CNavigationDrawer.vue')['default']
+    ExampleFromClaudeCode: typeof import('./src/components/menus/ExampleFromClaudeCode.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
